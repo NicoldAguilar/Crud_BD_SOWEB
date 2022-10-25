@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Editar Producto</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <!-- Iconos -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <!-- SweerAlert2 -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <script>
+            function EdicionCompleta()
+            {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, edit it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                                'Edited!',
+                                'Your data has been edited.',
+                                'success'
+                                ).then((result) => {
+                            if (result.isConfirmed) {                                 
+                                  const formulario = document.getElementById('edit');
+                                  formulario.submit();
+                              }
+                        });
+                        
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        
+        <form action="actualizar" method="POST" th:object="${producto}">
+            <input type="hidden" th:field="*{id}">
+            
+            <input type="text" th:field="*{nombre}"  placeholder="Ingrese nombre" required="required">
+            <br>
+            <textarea th:field="*{descripcion}" placeholder="Ingrese descripción" required="required"></textarea>
+            <br>
+            <input type="number" th:field="*{precio}" step="0.01" min="0.01" max="100" placeholder="Ingrese precio" required="required">
+            <br>
+            <button type="submit">Actualizar</button>
+        </form>
+        
+    </body>
+</html>

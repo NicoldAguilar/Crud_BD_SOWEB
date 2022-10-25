@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Productos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <div>
+            <a th:href="@{/nuevo}">Agregar</a>
+        </div>
+        
+        <hr>
+        
+        <div>
+            <form action="buscar" method="POST">
+                <input type="text" name="dato" placeholder="Ingrese dato a buscar">
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+        
+        <hr>
+        
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+            <tr th:each="producto,status : ${productos}">
+                <td th:text="${status.count}"></td>
+                <td th:text="${producto.id}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.descripcion}"></td>
+                <td th:text="${producto.precio}"></td>
+                <td>
+                    <a th:href="@{/editar(id=${producto.id})}">editar</a>
+                </td>
+                <td>
+                    <a th:href="@{/eliminar(id=${producto.id})}">eliminar</a>
+                </td>
+            </tr>
+
+        </table>
+        
+    </body>
+</html>
